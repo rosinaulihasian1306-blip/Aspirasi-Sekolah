@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Format Aspirasi: Hari Guru</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#2563EB; --blue-dark:#1E3A8A; --blue-soft:#EFF6FF; --border:#BFDBFE;
+  --card:#FFFFFF; --text:#1F2937; --muted:#6B7280; --bg:#F5F9FF; --err:#DC2626; --ok:#047857;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --blue:#3B82F6; --blue-dark:#BFDBFE; --blue-soft:#172554; --border:#1E40AF;
+    --card:#0F1B3D; --text:#E5E7EB; --muted:#9CA3AF; --bg:#0A1230; --err:#F87171; --ok:#34D399;
+  }
+}
+:root[data-theme="dark"]{
+  --blue:#3B82F6; --blue-dark:#BFDBFE; --blue-soft:#172554; --border:#1E40AF;
+  --card:#0F1B3D; --text:#E5E7EB; --muted:#9CA3AF; --bg:#0A1230; --err:#F87171; --ok:#34D399;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.6}
+.wrap{max-width:960px;margin:0 auto;padding:20px 16px 48px}
+header{text-align:center;padding:28px 8px 20px}
+h1{margin:0;color:var(--blue-dark);font-size:clamp(1.5rem,5.5vw,2.4rem);font-weight:700;letter-spacing:.5px;line-height:1.25}
+.sub{margin:10px auto 0;max-width:560px;color:var(--muted);font-size:clamp(.95rem,3.2vw,1.05rem)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 4px 18px rgba(37,99,235,.08);padding:22px}
+form.card{max-width:640px;margin:0 auto}
+.field{margin-bottom:18px}
+label{display:block;font-weight:600;color:var(--blue-dark);margin-bottom:6px;font-size:.95rem}
+input,select,textarea{width:100%;min-height:48px;padding:12px 14px;font:inherit;font-size:16px;color:var(--text);background:var(--blue-soft);border:1.5px solid var(--border);border-radius:12px;outline:none;transition:border-color .2s,box-shadow .2s}
+textarea{min-height:130px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.25)}
+.err{color:var(--err);font-size:.85rem;margin-top:5px;min-height:0}
+.hint{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:.8rem;margin-top:5px}
+button.send{width:100%;min-height:50px;border:0;border-radius:12px;background:var(--blue);color:#fff;font:inherit;font-size:1rem;font-weight:600;cursor:pointer;transition:transform .1s,filter .2s}
+button.send:hover{filter:brightness(1.08)}button.send:active{transform:scale(.98)}
+button:focus-visible{outline:3px solid var(--border);outline-offset:2px}
+.pop{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.45)}
+.pop.show{display:flex;animation:fade .25s ease both}
+.pop-bubble{position:relative;max-width:340px;width:100%;text-align:center;background:var(--card);border:2px solid var(--border);border-radius:24px 24px 24px 6px;padding:28px 22px 22px;box-shadow:0 12px 40px rgba(37,99,235,.3);animation:pop .4s cubic-bezier(.2,1.4,.4,1) both}
+.pop-bubble .ic{width:56px;height:56px;margin:0 auto 12px;border-radius:50%;background:var(--blue);color:#fff;font-size:30px;line-height:56px}
+.pop-bubble h3{margin:0 0 6px;color:var(--blue-dark);font-size:1.25rem}
+.pop-bubble p{margin:0 0 16px;color:var(--text)}
+.pop-bubble button{min-height:44px;padding:10px 28px;border:0;border-radius:12px;background:var(--blue);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+@keyframes pop{from{opacity:0;transform:scale(.7) translateY(20px)}to{opacity:1;transform:none}}
+section.dash{margin-top:44px}
+h2{color:var(--blue-dark);text-align:center;margin:0 0 14px;font-size:clamp(1.25rem,4.5vw,1.7rem)}
+.filters{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;-webkit-overflow-scrolling:touch;justify-content:flex-start}
+@media(min-width:700px){.filters{justify-content:center}}
+.chip{flex:0 0 auto;min-height:40px;padding:8px 16px;border-radius:999px;border:1.5px solid var(--border);background:var(--card);color:var(--blue-dark);font:inherit;font-size:.88rem;font-weight:500;cursor:pointer}
+.chip.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:800px){.grid{grid-template-columns:1fr 1fr}}
+.bubble{background:var(--card);border:1px solid var(--border);border-radius:18px 18px 18px 4px;padding:16px 18px;box-shadow:0 3px 12px rgba(37,99,235,.07);animation:fade .5s ease both;display:flex;flex-direction:column;gap:10px}
+.badge{align-self:flex-start;background:var(--blue);color:#fff;font-size:.75rem;font-weight:600;padding:3px 12px;border-radius:999px}
+.bubble p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.date{align-self:flex-end;color:var(--muted);font-size:.78rem}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:30px 10px;background:var(--card);border:1px dashed var(--border);border-radius:16px}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:36px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>FORMAT ASPIRASI : HARI GURU</h1>
+    <p class="sub">Ceritakan Saran, Ide, atau Konsep Kalimat Lewat Formulir di Bawah ini!!</p>
+  </header>
+
+  <form class="card" id="form" novalidate>
+    <div class="field">
+      <label for="nama">Nama</label>
+      <input id="nama" type="text" placeholder="Isi nama kamu" autocomplete="name">
+      <div class="err" id="e-nama"></div>
+    </div>
+    <div class="field">
+      <label for="kat">Kategori Aspirasi</label>
+      <select id="kat">
+        <option value="">Pilih kategori</option>
+        <option>Saran</option><option>Keluhan</option><option>Ide</option><option>Apresiasi</option><option>Lainnya</option>
+      </select>
+      <div class="err" id="e-kat"></div>
+    </div>
+    <div class="field">
+      <label for="pesan">Apa yang ingin disampaikan?</label>
+      <textarea id="pesan" maxlength="500" placeholder="Tulis poin utama yang ingin kamu sampaikan di sini..."></textarea>
+      <div class="hint"><span>Pesan ini akan tampil di Dashboard secara anonim (tanpa nama).</span><span id="count">0/500</span></div>
+      <div class="err" id="e-pesan"></div>
+    </div>
+    <button class="send" type="submit">Kirim Aspirasi</button>
+    <div class="pop" id="pop" role="status" aria-live="polite">
+      <div class="pop-bubble">
+        <div class="ic">✓</div>
+        <h3>Terima kasih!</h3>
+        <p>Aspirasimu sudah terkirim.</p>
+        <button type="button" id="popClose">Tutup</button>
+      </div>
+    </div>
+  </form>
+
+  <section class="dash" id="dashboard">
+    <h2>Dashboard Aspirasi</h2>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="list"></div>
+  </section>
+  <footer>Selamat Hari Guru 💙</footer>
+</div>
+
+<script>
+// Data disimpan di localStorage (per perangkat). Untuk dashboard bersama banyak orang,
+// ganti load()/save() dengan Firebase atau Supabase.
+const KEY='aspirasi_hari_guru';
+const CATS=['Semua','Saran','Keluhan','Ide','Apresiasi','Lainnya'];
+let active='Semua';
+let mem=[];
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return mem}}
+function save(d){mem=d;try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
+const $=id=>document.getElementById(id);
+
+function fmt(iso){
+  const d=new Date(iso);
+  const t=d.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+  const j=d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',hour12:false}).replace('.',':');
+  return t+', '+j;
+}
+function renderFilters(){
+  const f=$('filters');f.innerHTML='';
+  CATS.forEach(c=>{
+    const b=document.createElement('button');b.type='button';
+    b.className='chip'+(c===active?' active':'');b.textContent=c;
+    b.onclick=()=>{active=c;renderFilters();renderList()};
+    f.appendChild(b);
+  });
+}
+function renderList(){
+  const l=$('list');l.innerHTML='';
+  const data=load().filter(x=>active==='Semua'||x.kat===active);
+  if(!data.length){
+    const e=document.createElement('div');e.className='empty';
+    e.textContent='Belum ada aspirasi. Jadilah yang pertama!';l.appendChild(e);return;
+  }
+  data.forEach(x=>{
+    const b=document.createElement('div');b.className='bubble';
+    const bd=document.createElement('span');bd.className='badge';bd.textContent=x.kat;
+    const p=document.createElement('p');p.textContent=x.pesan;
+    const d=document.createElement('span');d.className='date';d.textContent=fmt(x.tgl);
+    b.append(bd,p,d);l.appendChild(b);
+  });
+}
+$('pesan').addEventListener('input',e=>{$('count').textContent=e.target.value.length+'/500'});
+
+$('form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const nama=$('nama').value.trim(),kat=$('kat').value,pesan=$('pesan').value.trim();
+  $('e-nama').textContent=nama?'':'Nama wajib diisi.';
+  $('e-kat').textContent=kat?'':'Silakan pilih kategori.';
+  $('e-pesan').textContent=pesan?'':'Pesan wajib diisi.';
+  if(!nama||!kat||!pesan)return;
+  // Nama hanya untuk validasi, tidak disimpan (anonim).
+  const d=load();d.unshift({kat,pesan,tgl:new Date().toISOString()});save(d);
+  $('form').reset();$('count').textContent='0/500';
+  const pop=$('pop');pop.classList.add('show');clearTimeout(window.__t);window.__t=setTimeout(()=>pop.classList.remove('show'),3500);
+  active='Semua';renderFilters();renderList();
+  $('dashboard').scrollIntoView({behavior:'smooth'});
+});
+$('popClose').onclick=()=>$('pop').classList.remove('show');
+$('pop').addEventListener('click',e=>{if(e.target.id==='pop')e.target.classList.remove('show')});
+renderFilters();renderList();
+</script>
+</body>
+</html>
